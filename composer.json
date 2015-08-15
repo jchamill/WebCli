@@ -1,0 +1,26 @@
+{
+  "name": "jchamill/web-cli",
+  "type": "project",
+  "description": "A web based command line interface.",
+  "keywords": ["framework","cli","command-line", "command-line interface"],
+  "homepage": "http://github.com/jchamill/web-cli",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "JC Hamill",
+      "email": "jchamill@creativeshampoo.com",
+      "homepage": "http://www.creativeshampoo.com/"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "WebCli\\": "core/backend/src"
+    },
+    "files": [
+      "config/config.php"
+    ]
+  }
+}
