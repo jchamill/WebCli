@@ -114,7 +114,7 @@ abstract class Command {
    *
    * @param $option
    * @return bool|mixed
-   * @throws Exception
+   * @throws \Exception
    */
   public function getOption($option) {
     if (!array_key_exists($option, $this->options)) {
