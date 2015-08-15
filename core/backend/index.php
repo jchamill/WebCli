@@ -1,27 +1,5 @@
 <?php
-/**
- *
- * Create authentication/permission helper class (determine roles, etc)
- *
- * Handle help message in base Command class based on command class settings.
- *
- *
- * DONE: Build ability to handle flags
- *
- * DONE: Allow commands to create the flags and options they support.
- *
- * DONE: Validate flags/arguments against command settings.
- *
- * DONE: Create session class to manage session and allow commands to interact
- * with session. This will be used for the cookie session used in requests.
- *
- * DONE: Might be worth extending Command class for authentication commands which
- * are commands that require the user to be logged in, boolean commands which
- * just return true or false, etc.
- */
 
-//define('REST_URL', 'http://infection.creativeshampoo.com/api/rest/');
-//define('WWW_ROOT', '/home/public_html/creativeshampoo.com/public');
 define('CORE_ROOT', dirname(dirname(__FILE__)));
 define('CLI_ROOT', CORE_ROOT . '/backend');
 
@@ -39,6 +17,7 @@ WebCli\Session::start();
 error_reporting(E_ALL);
 
 if (!isset($_REQUEST['input']) && !isset($_REQUEST['state'])) {
+  // @todo need to create a standard for handling these error responses
   die(json_encode(array('commandState' => 'error', 'responseText' => 'improper access')));
 }
 
