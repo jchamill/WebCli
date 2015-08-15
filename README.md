@@ -38,10 +38,10 @@ is a playground, you can play too.
 
 Road Map
 ---------------
--Persist data (complete)
--System commands (in progress)
--Remote Commands (in progress)
--Welcome message to be displayed as terminal output
--Read input from file
--Output to file/download
--Pipe commands
+- Persist data (complete)
+- System commands (in progress)
+- Remote Commands (in progress)
+- Welcome message to be displayed as terminal output
+- Read input from file
+- Output to file/download
+- Pipe commands
