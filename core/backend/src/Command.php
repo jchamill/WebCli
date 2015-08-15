@@ -13,19 +13,19 @@ abstract class Command {
   protected $input;
 
   // The command
-	protected $command;
+  protected $command;
 
-	// Command options from input
-	protected $options;
+  // Command options from input
+  protected $options;
 
-	// Available options from command configuration
-	protected $_options  = array();
+  // Available options from command configuration
+  protected $_options  = array();
 
-	// Command flags from input
-	protected $flags;
+  // Command flags from input
+  protected $flags;
 
-	// Available flags from command configuration
-	protected $_flags = array();
+  // Available flags from command configuration
+  protected $_flags = array();
 
   // Arguments that were read from the prompt
   protected $promptArgs = array();
@@ -34,10 +34,10 @@ abstract class Command {
   protected $promptArgIndex = 0;
 
   // Stores the output of the command (@todo might need some refactoring)
-	protected $output;
+  protected $output;
 
   // Determines if an error was encountered (@todo is this necessary?)
-	protected $error;
+  protected $error;
 
   /**
    * Constructor
@@ -47,20 +47,20 @@ abstract class Command {
   public function __construct(InputResult $inputResult) {
 
     $this->input = $inputResult->input;
-		$this->command = $inputResult->command;
-		$this->options = $inputResult->options;
-		$this->flags = $inputResult->flags;
+    $this->command = $inputResult->command;
+    $this->options = $inputResult->options;
+    $this->flags = $inputResult->flags;
     $this->args = $inputResult->args;
 
     // @todo inject an output class so different outputs can be used
     $this->output = new \stdClass;
-		$this->output->commandState = 'initialized';
+    $this->output->commandState = 'initialized';
 
-		$this->error = FALSE;
+    $this->error = FALSE;
 
     $this->init();
     $this->validate();
-	}
+  }
 
   /**
    * Add an allowed flag to the command. The primary use for this is used
@@ -69,8 +69,8 @@ abstract class Command {
    * @param $flag
    */
   protected function addFlag($flag) {
-		array_push($this->_flags, $flag);
-	}
+    array_push($this->_flags, $flag);
+  }
 
   /**
    * Determine if a flag is set. If the flag is set, returns TRUE. Otherwise
@@ -80,8 +80,8 @@ abstract class Command {
    * @return bool
    */
   protected function getFlag($flag) {
-		return in_array($flag, $this->flags);
-	}
+    return in_array($flag, $this->flags);
+  }
 
   /**
    * Add an allowed option to the command. The primary use for this is used
@@ -91,8 +91,8 @@ abstract class Command {
    * @param array $config
    */
   public function addOption($option, $config = array()) {
-		$this->_options[$option] = $config;
-	}
+    $this->_options[$option] = $config;
+  }
 
   /**
    * @todo Figure out if this is necessary
@@ -101,13 +101,13 @@ abstract class Command {
    * @return bool|mixed
    */
   public function getOptionIndex($option) {
-		$keys = array_keys($this->_options);
-		$index = array_search($option, $keys);
-		if (array_key_exists($index, $this->options)) {
-			return $index;
-		}
-		return FALSE;
-	}
+    $keys = array_keys($this->_options);
+    $index = array_search($option, $keys);
+    if (array_key_exists($index, $this->options)) {
+      return $index;
+    }
+    return FALSE;
+  }
 
   /**
    * Returns the value of an option.
@@ -117,18 +117,18 @@ abstract class Command {
    * @throws Exception
    */
   public function getOption($option) {
-		if (!array_key_exists($option, $this->options)) {
-			if (false !== ($default_option_index = $this->getOptionIndex($option))) {
-				$option = $default_option_index;
-				//need to check index exists in options?
-			} else if (array_key_exists('required', $this->_options[$option]) && !$this->_options[$option]['required']) {
+    if (!array_key_exists($option, $this->options)) {
+      if (false !== ($default_option_index = $this->getOptionIndex($option))) {
+        $option = $default_option_index;
+        //need to check index exists in options?
+      } else if (array_key_exists('required', $this->_options[$option]) && !$this->_options[$option]['required']) {
         return false; // @todo set a variable and return at the end of function
       } else {
-				throw new \Exception('missing required option -' . $option);
-			}
-		}
-		return $this->options[$option];
-	}
+        throw new \Exception('missing required option -' . $option);
+      }
+    }
+    return $this->options[$option];
+  }
 
   /**
    * Set the arguments that were read from the prompt.
@@ -219,8 +219,8 @@ abstract class Command {
    * @param $output
    */
   public function setOutput($output) {
-		$this->output->responseText = (string)$output;
-	}
+    $this->output->responseText = (string)$output;
+  }
 
   /**
    * Set the masked variable that will be sent to the terminal. If this
@@ -231,8 +231,8 @@ abstract class Command {
    * @param $masked
    */
   public function setMasked($masked) {
-		$this->output->masked = $masked;
-	}
+    $this->output->masked = $masked;
+  }
 
   /**
    * Set the command state that will be sent to the terminal.
@@ -240,8 +240,8 @@ abstract class Command {
    * @param $state
    */
   public function setState($state) {
-		$this->output->commandState = $state;
-	}
+    $this->output->commandState = $state;
+  }
 
   /**
    * Set the output callback function that will be sent to the terminal.
