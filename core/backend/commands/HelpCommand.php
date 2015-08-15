@@ -4,7 +4,7 @@
  * Class HelpCommand
  */
 class HelpCommand extends WebCli\SystemCommand {
-	public function execute() {
+  public function execute() {
     $output[] = 'Available Commands';
     $output[] = '';
 
@@ -30,8 +30,8 @@ class HelpCommand extends WebCli\SystemCommand {
       $output[] = $cmd;
     }
 
-		$this->setOutput(implode('<br />', $output));
-	}
+    $this->setOutput(implode('<br />', $output));
+  }
 
   private function _loadCommandsByDir($dir) {
     $files = scandir($dir);

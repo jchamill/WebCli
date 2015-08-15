@@ -39,7 +39,7 @@ WebCli\Session::start();
 error_reporting(E_ALL);
 
 if (!isset($_REQUEST['input']) && !isset($_REQUEST['state'])) {
-	die(json_encode(array('commandState' => 'error', 'responseText' => 'improper access')));
+  die(json_encode(array('commandState' => 'error', 'responseText' => 'improper access')));
 }
 
 // @todo This feels a little dirty, try to make it prettier

@@ -5,10 +5,10 @@
  */
 class ExampleCommand extends WebCli\Command {
 
-	public function init() {
+  public function init() {
 
     // Prompt for additional input
-		$this->addFlag('p');
+    $this->addFlag('p');
 
     // Mask the prompt input
     $this->addFlag('m');
@@ -29,7 +29,7 @@ class ExampleCommand extends WebCli\Command {
     $this->addOption('b', array(
       'required' => FALSE,
     ));
-	}
+  }
 
   public function execute() {
 
@@ -84,6 +84,6 @@ class ExampleCommand extends WebCli\Command {
 
     $this->setOutput($output);
 
-	}
+  }
 
 }

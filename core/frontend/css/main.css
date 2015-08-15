@@ -15,112 +15,112 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
-	display: block;
+    display: block;
 }
 body {
-	line-height: 1;
+    line-height: 1;
 }
 ol, ul {
-	list-style: none;
+    list-style: none;
 }
 blockquote, q {
-	quotes: none;
+    quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+    content: '';
+    content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 /* End Reset */
 html, body, #page {
-	height:100%;
+    height:100%;
 }
 
 body {
-	background:#000;
-	color:#ccc;
-	font:14px "Courier New", Courier, monospace;
+    background:#000;
+    color:#ccc;
+    font:14px "Courier New", Courier, monospace;
 }
 
 em {
-	font-style:italic;
+    font-style:italic;
 }
 
 strong {
-	font-weight:bold;
+    font-weight:bold;
 }
 
 #visual {
-	background:#ccc;
-	color:#000;
-	font:16px Georgia, "Times New Roman", Times, serif;
+    background:#ccc;
+    color:#000;
+    font:16px Georgia, "Times New Roman", Times, serif;
 }
 
 #visual-content {
-	padding:15px;
+    padding:15px;
 }
 
 #visual h1 {
-	font-size:24px;
-	margin-bottom:.5em;
+    font-size:24px;
+    margin-bottom:.5em;
 }
 
 #window {
-	height:100%;
-	overflow:auto;
+    height:100%;
+    overflow:auto;
 }
 
 #window-content {
-	padding:15px;
+    padding:15px;
 }
 
 #command {
-	position:absolute;
-	left:-9999px;
+    position:absolute;
+    left:-9999px;
 }
 
 #cursor {
-	background:#ccc;
-	display:inline-block;
-	height:12px;
-	width:7px;
+    background:#ccc;
+    display:inline-block;
+    height:12px;
+    width:7px;
 }
 
 .blink {
-	background:#000!important;
+    background:#000!important;
 }
 
 .red {
-	color:#c00;
+    color:#c00;
 }
 
 /* ACE */
 #editor { 
-	position:absolute;
-	top:0;
-	right:0;
-	bottom:0;
-	left:0;
-	z-index:500;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    z-index:500;
 }
 
 
 /* LS */
 .ls-directory {
-	font-weight:bold;
-	color:#09f;
+    font-weight:bold;
+    color:#09f;
 }
