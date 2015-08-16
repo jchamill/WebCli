@@ -7,6 +7,9 @@ namespace WebCli;
  */
 class Terminal {
 
+  public $name = 'WebCLI';
+  public $version = 'beta-0.0.1';
+
   public $parser;
   public $commandFactory;
 

@@ -6,8 +6,7 @@ abstract class SystemCommand extends Command {
 
   protected $terminal;
 
-  public function __construct(InputResult $inputResult, Terminal $terminal) {
-    parent::__construct($inputResult);
+  public function setTerminal(Terminal $terminal) {
     $this->terminal = $terminal;
   }
 

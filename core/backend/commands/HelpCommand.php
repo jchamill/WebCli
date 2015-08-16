@@ -5,36 +5,51 @@
  */
 class HelpCommand extends WebCli\SystemCommand {
   public function execute() {
-    $output[] = 'Available Commands';
+    $output[] = $this->terminal->name . ' ' . $this->terminal->version;
     $output[] = '';
 
-    $commands = array();
-    $systemCommands = array();
+    $commandPaths = array();
+    $systemCommandPaths = array();
 
     $commandDirs = $this->terminal->getcommandDirectories();
     $systemCommandDirs = $this->terminal->getSystemCommandDirectories();
 
     foreach ($commandDirs as $dir) {
-      $commands = array_merge($commands, $this->_loadCommandsByDir($dir));
+      $commandPaths = array_merge($commandPaths, $this->_loadCommandsByDir($dir));
     }
 
     foreach ($systemCommandDirs as $dir) {
-      $systemCommands = array_merge($systemCommands, $this->_loadCommandsByDir($dir));
+      $systemCommandPaths = array_merge($systemCommandPaths, $this->_loadCommandsByDir($dir));
     }
 
-    foreach ($commands as $cmd) {
-      $output[] = $cmd;
+    foreach ($commandPaths as $class => $path) {
+      require_once($path);
+      $output[] = $class::help();
     }
 
-    foreach ($systemCommands as $cmd) {
-      $output[] = $cmd;
+    foreach ($systemCommandPaths as $class => $path) {
+      require_once($path);
+      $output[] = $class::help();
     }
 
     $this->setOutput(implode('<br />', $output));
   }
 
   private function _loadCommandsByDir($dir) {
+    $paths = array();
+
     $files = scandir($dir);
-    return array_diff($files, array('.', '..'));
+    foreach ($files as $file) {
+      if (!in_array($file, array('.', '..'))) {
+        $class = $this->_getClassFromFilename($file);
+        $paths[$class] = $dir . $file;
+      }
+    }
+
+    return $paths;
+  }
+
+  private function _getClassFromFilename($filename) {
+    return str_replace('.php', '', $filename);
   }
 }

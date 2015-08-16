@@ -23,7 +23,7 @@ class CommandFactory implements CommandFactoryInterface {
 
       if (file_exists($file)) {
         require_once($file);
-        return new $class($inputResult);
+        return $class::createFromInput($inputResult);
       }
     }
 
@@ -32,7 +32,9 @@ class CommandFactory implements CommandFactoryInterface {
 
       if (file_exists($file)) {
         require_once($file);
-        return new $class($inputResult, $terminal);
+        $instance = $class::createFromInput($inputResult);
+        $instance->setTerminal($terminal);
+        return $instance;
       }
     }
 

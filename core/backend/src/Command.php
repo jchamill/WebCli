@@ -40,12 +40,32 @@ abstract class Command {
   protected $error;
 
   /**
-   * Constructor
+   * Need an overloaded constructor so we can instantiate commands
+   * in order to display help information about the command and also
+   * instantiate the command from and InputResult. This is empty so
+   * we can provide static methods to return the instance.
+   */
+  protected function __construct() {}
+
+  /**
+   * Return an instance of the command by passing an InputResult.
+   * This method is used when creating commands from a factory.
+   *
+   * @param InputResult $inputResult
+   * @return static
+   */
+  public static function createFromInput(InputResult $inputResult) {
+    $instance = new static();
+    $instance->initialize($inputResult);
+    return $instance;
+  }
+
+  /**
+   * Initialize the command from an InputResult.
    *
    * @param InputResult $inputResult
    */
-  public function __construct(InputResult $inputResult) {
-
+  protected function initialize(InputResult $inputResult) {
     $this->input = $inputResult->input;
     $this->command = $inputResult->command;
     $this->options = $inputResult->options;
@@ -60,6 +80,42 @@ abstract class Command {
 
     $this->init();
     $this->validate();
+  }
+
+  /**
+   * Output the help based on the configuration of available
+   * options and flags.
+   *
+   * @todo provide better option output and support arguments
+   * if they are available. Currently, these are not set in init
+   * but called directly from execute, so may need to refactor.
+   */
+  public static function help() {
+    $output = array();
+
+    // Only need to create an instance of the command, not passing
+    // an InputResult since we are only getting info about the command.
+    $instance = new static();
+
+    // Call init so the flags and options will be set
+    $instance->init();
+
+    // Get the actual command by converting the class name
+    $output[] = strtolower(str_replace('Command', '', get_class($instance)));
+
+    // Show available flags
+    if (!empty($instance->_flags)) {
+      $output[] = '[-' . implode('', $instance->_flags) . ']';
+    }
+
+    // Show available options
+    if (!empty($instance->_options)) {
+      foreach ($instance->_options as $option => $config) {
+        $output[] = '[-' . $option . ' option]';
+      }
+    }
+
+    return implode(' ', $output);
   }
 
   /**
@@ -203,14 +259,6 @@ abstract class Command {
     if (!empty($invalidOptions)) {
       throw new \Exception('invalid options: ' . implode(', ', array_keys($invalidOptions)));
     }
-  }
-
-  /**
-   * @todo Output the help based on the configuration of available
-   * options and flags. A description value could be added as well.
-   */
-  public function help() {
-
   }
 
   /**
