@@ -111,7 +111,13 @@ abstract class Command {
     // Show available options
     if (!empty($instance->_options)) {
       foreach ($instance->_options as $option => $config) {
-        $output[] = '[-' . $option . ' option]';
+        $option_help = '[-' . $option . ' option]';
+        // required key is not explicitly set, if it doesn't exist it is required
+        // required key must be explicitly set to FALSE for option to be optional
+        if (!array_key_exists('required', $config) || $config['required'] === TRUE) {
+          $option_help .= '*';
+        }
+        $output[] = $option_help;
       }
     }
 
