@@ -41,8 +41,10 @@ class HelpCommand extends WebCli\SystemCommand {
     $files = scandir($dir);
     foreach ($files as $file) {
       if (!in_array($file, array('.', '..'))) {
-        $class = $this->_getClassFromFilename($file);
-        $paths[$class] = $dir . $file;
+        if (substr($file, 0, 1) !== '.') {
+          $class = $this->_getClassFromFilename($file);
+          $paths[$class] = $dir . $file;
+        }
       }
     }
 
